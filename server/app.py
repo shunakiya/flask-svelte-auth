@@ -47,7 +47,12 @@ def login():
   form = LoginForm()
 
   if form.validate_on_submit():
-    user = UserInfo.get(UserInfo.username==form.username.data)
+    try:
+      user = UserInfo.get(UserInfo.username == form.username.data)
+    except:
+      return redirect(url_for('login'))
+
+    print(user)
 
     if user:
       if bcrypt.check_password_hash(user.password, form.password.data):
