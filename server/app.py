@@ -4,7 +4,6 @@ from flask_login import login_user, LoginManager, login_required, logout_user, c
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
-from playhouse.shortcuts import model_to_dict
 
 app=Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -61,7 +60,6 @@ def login():
 
   return render_template('login.html', form=form)
 
-
 @app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def dashboard():
@@ -71,8 +69,6 @@ def dashboard():
 def logout():
   logout_user()
   return redirect(url_for("login"))
-
-
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
